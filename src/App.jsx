@@ -71,8 +71,15 @@ function Menu() {
       <Pizza
         name="Pizza Salamino"
         ingredients="Tomato, mozarella, and pepperoni"
-        price="15"
+        price={15}
         photoName="./src/assets/salamino.jpg"
+        soldOut="true"
+      />
+      <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        price={12}
+        photoName="./src/assets/spinaci.jpg"
         soldOut="true"
       />
     </main>
@@ -82,10 +89,13 @@ function Menu() {
 function Pizza(props) {
   console.log("pizza props: ", props);
   return (
-    <div className="pizzas">
+    <div className="pizza">
       <img src={props.photoName} alt={props.name} className="img" />
-      <h3>{props.name}</h3>
-      <p className="text">{props.ingredients}</p>
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price}</span>
+      </div>
     </div>
   );
 }
