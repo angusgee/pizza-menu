@@ -85,7 +85,8 @@ function Menu() {
 }
 
 function Pizza(props) {
-  console.log("pizza props: ", props);
+  // console.log("pizza props: ", props);
+  if (props.pizzaObj.soldOut) return null;
   return (
     <li className="pizza">
       <img
@@ -120,13 +121,7 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <div className="order">
-          <p>
-            We&apos;re open until {closeHour}:00. Come pay us a visit, or order
-            online.
-          </p>
-          <button className="btn">Order</button>
-        </div>
+        <Order closeHour={closeHour} />
       ) : (
         <p>
           We&apos;re happy to welcome you between {openHour}:00 and {closeHour}
@@ -135,6 +130,16 @@ function Footer() {
       )}
     </footer>
   );
+}
+
+function Order(props) {
+  <div className="order">
+    <p>
+      We&apos;re open until {props.closeHour}:00. Come pay us a visit, or order
+      online.
+    </p>
+    <button className="btn">Order</button>
+  </div>;
 }
 
 export default App;
