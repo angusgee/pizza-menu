@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./index.css";
+import React from "react";
 
 const pizzaData = [
   {
@@ -73,7 +74,7 @@ function Menu() {
       <h2>Our Menu</h2>
 
       {numPizzas > 0 ? (
-        <>
+        <React.Fragment>
           <p>
             Authentic Italian cuisine. Six creative dishes to choose from. All
             from our stone oven, all organic and delicious.{" "}
@@ -84,7 +85,7 @@ function Menu() {
               <Pizza pizzaObj={pizza} key={pizza.name} />
             ))}
           </ul>
-        </>
+        </React.Fragment>
       ) : (
         <p>We&apos;re still working on our menu. Please come back later.</p>
       )}
@@ -93,14 +94,14 @@ function Menu() {
 }
 
 function Pizza({ pizzaObj }) {
-  if (pizzaObj.soldOut) return null;
+  // if (pizzaObj.soldOut) return null;
   return (
     <li className="pizza">
       <img src={pizzaObj.photoName} alt={pizzaObj.name} className="img" />
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <span>{pizzaObj.soldOut ? "Sold Out" : pizzaObj.price}</span>
       </div>
     </li>
   );
