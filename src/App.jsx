@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./index.css";
-import React from "react";
+// import React from "react";
 
 const pizzaData = [
   {
@@ -74,7 +74,7 @@ function Menu() {
       <h2>Our Menu</h2>
 
       {numPizzas > 0 ? (
-        <React.Fragment>
+        <>
           <p>
             Authentic Italian cuisine. Six creative dishes to choose from. All
             from our stone oven, all organic and delicious.{" "}
@@ -85,7 +85,7 @@ function Menu() {
               <Pizza pizzaObj={pizza} key={pizza.name} />
             ))}
           </ul>
-        </React.Fragment>
+        </>
       ) : (
         <p>We&apos;re still working on our menu. Please come back later.</p>
       )}
@@ -94,14 +94,16 @@ function Menu() {
 }
 
 function Pizza({ pizzaObj }) {
-  // if (pizzaObj.soldOut) return null;
+  console.log(pizzaObj);
+
   return (
-    <li className="pizza">
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name} className="img" />
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.soldOut ? "Sold Out" : pizzaObj.price}</span>
+        {/* <span>{pizzaObj.soldOut ? "Sold Out" : pizzaObj.price}</span> */}
+        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -109,28 +111,31 @@ function Pizza({ pizzaObj }) {
 
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 1;
+  const openHour = 5;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
 
-  if (!isOpen)
-    return (
-      <p>
-        We&apos;re happy to welcome you between {openHour}:00 and {closeHour}
-        :00.
-      </p>
-    );
+  // if (!isOpen)
+  //   return (
+  //     <p>
+  //       We&apos;re happy to welcome you between {openHour}:00 and {closeHour}
+  //       :00.
+  //     </p>
+  //   );
 
   return (
     <footer className="footer">
       {isOpen ? (
         <Order closeHour={closeHour} openHour={openHour} />
       ) : (
-        <p>
-          We&apos;re happy to welcome you between {openHour}:00 and {closeHour}
-          :00.
-        </p>
+        <div className="order">
+          <p>
+            We&apos;re happy to welcome you between {openHour}:00 and{" "}
+            {closeHour}
+            :00.
+          </p>
+        </div>
       )}
     </footer>
   );
